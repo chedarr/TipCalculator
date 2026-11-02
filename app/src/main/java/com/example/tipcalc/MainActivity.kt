@@ -44,6 +44,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TipcalcScreen(){
     var orderAmount by remember { mutableStateOf("") }
+    var  dishesCount by remember { mutableStateOf("") }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -77,6 +78,26 @@ fun TipcalcScreen(){
                     placeholder = { Text(text = "Введите сумму заказа") },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Decimal
+                    ),
+                    singleLine = true
+                )
+            }
+
+            Column {
+                Text(
+                    text = "Количество блюд",
+                    fontWeight = FontWeight.Medium
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                OutlinedTextField(
+                    value = dishesCount,
+                    onValueChange = { dishesCount = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    placeholder = { Text("Введите количество блюд") },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number
                     ),
                     singleLine = true
                 )
