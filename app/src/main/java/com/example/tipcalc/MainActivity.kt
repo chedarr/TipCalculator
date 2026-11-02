@@ -15,14 +15,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -47,7 +50,10 @@ class MainActivity : ComponentActivity() {
 fun TipcalcScreen(){
     var orderAmount by remember { mutableStateOf("") }
     var  dishesCount by remember { mutableStateOf("") }
-    var tipPercent by remember { mutableStateOf(10f) }
+    var tipPercent by remember { mutableFloatStateOf(10f) }
+
+    val discountOptions = listOf(3,5,7,10)
+    val selectedDiscount = 10
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -122,6 +128,37 @@ fun TipcalcScreen(){
                 ) {
                     Text("0%")
                     Text("25%")
+                }
+            }
+
+            Column {
+                Text(
+                    text = "Скидка:",
+                    fontWeight = FontWeight.Medium
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    discountOptions.forEach { discount ->
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            RadioButton(
+                                selected = discount == selectedDiscount,
+                                onClick = null
+                            )
+
+                            Text(
+                                text = "$discount%",
+                                fontWeight = FontWeight.Medium
+                            )
+                        }
+                    }
                 }
             }
         }
