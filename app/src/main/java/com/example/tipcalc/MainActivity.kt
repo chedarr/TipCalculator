@@ -63,6 +63,18 @@ fun TipcalcScreen(){
         else -> 10
     }
 
+    val amount = orderAmount
+        .replace(',', '.')
+        .toDoubleOrNull() ?: 0.0
+    // Расчёт скидки
+    val discountAmount = amount * selectedDiscount / 100
+    // Сумма заказа с учётом скидки
+    val discountedAmount = amount - discountAmount
+    // Расчёт чаевых
+    val tipAmount = discountedAmount * tipPercent / 100
+    // Итоговая сумма
+    val totalAmount = discountedAmount + tipAmount
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -169,7 +181,34 @@ fun TipcalcScreen(){
                     }
                 }
             }
+            // Результаты расчёта
+            if (amount > 0) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = "Результаты расчёта",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Скидка: %.2f ₽".format(discountAmount)
+                    )
+                    Text(
+                        text = "Сумма со скидкой: %.2f ₽".format(discountedAmount)
+                    )
+                    Text(
+                        text = "Чаевые: %.2f ₽".format(tipAmount)
+                    )
+                    Text(
+                        text = "Итого к оплате: %.2f ₽".format(totalAmount),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
+
     }
 }
 
