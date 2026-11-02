@@ -188,11 +188,6 @@ fun TipcalcScreen(){
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "Результаты расчёта",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
                         text = "Скидка: %.2f ₽".format(discountAmount)
                     )
                     Text(
@@ -203,7 +198,7 @@ fun TipcalcScreen(){
                     )
                     Text(
                         text = "Итого к оплате: %.2f ₽".format(totalAmount),
-                        fontSize = 18.sp,
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
                     )
                 }
