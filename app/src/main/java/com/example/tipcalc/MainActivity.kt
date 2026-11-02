@@ -140,7 +140,8 @@ fun TipcalcScreen(){
                 Slider(
                     value = tipPercent,
                     onValueChange = { tipPercent = it },
-                    valueRange = 0f..25f
+                    valueRange = 0f..25f,
+                    steps = 24
                 )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
