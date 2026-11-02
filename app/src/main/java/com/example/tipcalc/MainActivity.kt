@@ -53,7 +53,15 @@ fun TipcalcScreen(){
     var tipPercent by remember { mutableFloatStateOf(10f) }
 
     val discountOptions = listOf(3,5,7,10)
-    val selectedDiscount = 10
+
+    val dishCount = dishesCount.toIntOrNull() ?: 0
+    val selectedDiscount = when {
+        dishCount in 1..2 -> 3
+        dishCount in 3..5 -> 5
+        dishCount in 6..10 -> 7
+        dishCount > 10 -> 10
+        else -> 10
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
