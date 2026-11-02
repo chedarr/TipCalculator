@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,6 +47,7 @@ class MainActivity : ComponentActivity() {
 fun TipcalcScreen(){
     var orderAmount by remember { mutableStateOf("") }
     var  dishesCount by remember { mutableStateOf("") }
+    var tipPercent by remember { mutableStateOf(10f) }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -101,6 +104,25 @@ fun TipcalcScreen(){
                     ),
                     singleLine = true
                 )
+            }
+
+            Column{
+                Text(
+                    text = "Чаевые: ${tipPercent.toInt()}% ",
+                    fontWeight = FontWeight.Medium
+                )
+                Slider(
+                    value = tipPercent,
+                    onValueChange = { tipPercent = it },
+                    valueRange = 0f..25f
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text("0%")
+                    Text("25%")
+                }
             }
         }
     }
